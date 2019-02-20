@@ -3,32 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GridPanel"
+        xmlns:samsoft="clr-namespace:SamSoft.Windows"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid x:Name="LayoutRoot">
 
+        <Grid.Resources>
+            <DataTemplate x:Key="ButtonTemplate">
+                <Button Content="{Binding}"></Button>
+            </DataTemplate>
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <ItemsControl ItemsSource="{Binding Items}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ItemsControl Margin="5" Grid.Column="0" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ButtonTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <GridPanels:GridPanel />
+                    <samsoft:GridPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-
-
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding}"></Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Grid.Row="1" Content="Add Items" Click="ButtonAddItems_Click"></Button>
-        
+        <ItemsControl Margin="5" Grid.Column="1" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ButtonTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <samsoft:GridPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Content="Add Items" Click="ButtonAddItems_Click"></Button>
+
     </Grid>
 </Window>
