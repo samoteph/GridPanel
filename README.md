@@ -16,7 +16,7 @@ Then you can integrate it as ItemsPanelTemplate like this :
 <ItemsControl ItemsSource="{Binding Items}">
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
-            <GridPanels:GridPanel Orientation="Vertical" />
+            <samsoft:GridPanel Orientation="Vertical" />
         </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
 </ItemsControl>
