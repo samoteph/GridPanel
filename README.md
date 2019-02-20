@@ -13,7 +13,7 @@ xmlns:samsoft="clr-namespace:SamSoft.Windows"
 Then you can integrate it as ItemsPanelTemplate like this : 
 
 ```
-<ItemsControl Margin="5" Grid.Column="1" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ButtonTemplate}">
+<ItemsControl ItemsSource="{Binding Items}">
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
             <GridPanels:GridPanel Orientation="Vertical" />
