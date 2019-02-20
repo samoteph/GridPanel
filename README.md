@@ -2,8 +2,6 @@
 
 A WPF Panel for ItemsControl that's works like a grid.
 
-![Image Grid](GridPanel/Images/GridPanel.jpg)
-
 How to use it ?
 
 First, add the namespace :
@@ -23,6 +21,11 @@ Then you can integrate it as ItemsPanelTemplate like this :
     </ItemsControl.ItemsPanel>
 </ItemsControl>
 ```
+
+It's possible to change the orientation of the GridPanel with values Vertical or Horizontal. 
+
+![Image Grid](GridPanel/Images/GridPanel.jpg)
+
 [Download GridPanel now!](GridPanel/GridPanel/GridPanel.cs) 
 
 
