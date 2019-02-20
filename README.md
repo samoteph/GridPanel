@@ -22,6 +22,6 @@ Then you can integrate it as ItemsPanelTemplate like this :
 </ItemsControl>
 ```
 [
-Download GridPanel now!](docs/CONTRIBUTING.md) 
+Download GridPanel now!](GridPanel/GridPanel/GridPanel.cs) 
 
 
