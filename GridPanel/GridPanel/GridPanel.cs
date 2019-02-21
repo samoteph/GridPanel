@@ -54,6 +54,51 @@ namespace SamSoft.Windows
             }
         }
 
+        public void SynchroGridDefinition(Orientation orientation)
+        {
+            if (this.InternalChildren.Count == 0)
+            {
+                this.ColumnDefinitions.Clear();
+                this.RowDefinitions.Clear();
+                return;
+            }
+
+            if (orientation == Orientation.Horizontal)
+            {
+                if (this.ColumnDefinitions.Count > this.InternalChildren.Count)
+                {
+                    for (int x = 0; x < this.ColumnDefinitions.Count - this.InternalChildren.Count; x++)
+                    {
+                        this.RemoveGridDefinition(orientation);
+                    }
+                }
+                else if (this.ColumnDefinitions.Count < this.InternalChildren.Count)
+                {
+                    for (int x = 0; x < this.InternalChildren.Count - this.ColumnDefinitions.Count; x++)
+                    {
+                        this.AddGridDefinition(orientation);
+                    }
+                }
+            }
+            else
+            {
+                if (this.RowDefinitions.Count > this.InternalChildren.Count)
+                {
+                    for (int x = 0; x < this.RowDefinitions.Count - this.InternalChildren.Count; x++)
+                    {
+                        this.RemoveGridDefinition(orientation);
+                    }
+                }
+                else if (this.RowDefinitions.Count < this.InternalChildren.Count)
+                {
+                    for (int x = 0; x < this.InternalChildren.Count - this.RowDefinitions.Count; x++)
+                    {
+                        this.AddGridDefinition(orientation);
+                    }
+                }
+            }
+        }
+
         private void RemoveGridDefinition(Orientation orientation)
         {
             if (orientation == Orientation.Horizontal)
@@ -66,30 +111,11 @@ namespace SamSoft.Windows
             }
         }
 
-        protected override void OnIsItemsHostChanged(bool oldIsItemsHost, bool newIsItemsHost)
-        {
-            base.OnIsItemsHostChanged(oldIsItemsHost, newIsItemsHost);
-
-            if(newIsItemsHost == true)
-            {
-                this.ColumnDefinitions.Clear();
-                this.RowDefinitions.Clear();
-            }
-        }
-
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {
             base.OnVisualChildrenChanged(visualAdded, visualRemoved);
 
-            if(visualAdded != null)
-            {
-                this.AddGridDefinition(this.Orientation);
-            }
-
-            if(visualRemoved != null)
-            {
-                this.RemoveGridDefinition(this.Orientation);
-            }
+            this.SynchroGridDefinition(this.Orientation);
 
             this.ApplyGridIndex();
         }
@@ -100,15 +126,19 @@ namespace SamSoft.Windows
             {
                 var child = this.InternalChildren[i];
 
-                if (this.Orientation == Orientation.Horizontal)
+                if (child != null)
                 {
-                    Grid.SetColumn(child, i);
-                }
-                else
-                {
-                    Grid.SetRow(child, i);
+                    if (this.Orientation == Orientation.Horizontal)
+                    {
+                        Grid.SetColumn(child, i);
+                    }
+                    else
+                    {
+                        Grid.SetRow(child, i);
+                    }
                 }
             }
         }
     }
 }
+
